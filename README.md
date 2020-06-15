@@ -19,7 +19,7 @@ Instalacion:
    - **npm install**
    - **php artisan migrate**  //Crea las tablas en la db
    - **php artisan db:seed --class=ArtistInsert** //Script que procesa un ** public/artist_list.csv ** que inserta en la db
-   - **php artisan serve**
+   - **php artisan serve**  o  **php -S localhost:8000 -t public**
 
 3- Endpoints:
    - **/songs** :
