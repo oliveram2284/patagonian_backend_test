@@ -1,24 +1,71 @@
-# Lumen PHP Framework
+# Challenge - Backend Developer
+- Technical Review - Backend Developer
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+Instalacion:
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+- Editar archivo .env en:
+   - Datos de conexion DB:
+      DB_DATABASE= **DATABASE NAME**     
+      DB_USERNAME= **DATABASE USERNAME**
+      DB_PASSWORD= **DATABASE PASSWORD**
+     
+   - DATOS API SPOTIFY: 
+   SPOTIFY_CLIENT_ID=** XXXXXXXXXXXXX **
+   SPOTIFY_CLIENT_SECRET=** XXXXXXXXXXXXX **
+   SPOTIFY_CALLBACK_URL=** XXXXXXXXXXXXX **
+   
+2- Desde la consola de comando posicionado en el root del proyecto ejecutar los siguientes comandos:
+   - **composer update**
+   - **npm install**
+   - **php artisan migrate**  //Crea las tablas en la db
+   - **php artisan db:seed --class=ArtistInsert** //Script que procesa un ** public/artist_list.csv ** que inserta en la db
+   - **php artisan serve**
 
-## Official Documentation
-
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3- Endpoints:
+   - **/songs** :
+     + method: GET
+     + params: 
+        - artistName: required(string - minLength: 3)
+     + result: {
+         "songs": [
+            {
+               "songId": "2TpxZ7JUBn3udsd6aR7qg68",
+               "songTitle": "Californication"
+            },
+            {
+               "songId": "1TuxZ7JU323uw46aR7qd6V",
+               "songTitle": "Otherside"
+            }
+         ]
+   - **/songs/{songId}:
+     - songId: required(string)
+     - response: {
+         "artists": [
+            {
+               "external_urls": {
+               "spotify": "https://open.spotify.com/artist/08td7MxkoHQkXnWAYD8d6Q"
+               },
+               "href": "https://api.spotify.com/v1/artists/08td7MxkoHQkXnWAYD8d6Q",
+               "id": "08td7MxkoHQkXnWAYD8d6Q",
+               "name": "Tania Bowra",
+               "type": "artist",
+               "uri": "spotify:artist:08td7MxkoHQkXnWAYD8d6Q"
+            }
+         ],
+         "disc_number": 1,
+         "duration_ms": 276773,
+         "explicit": false,
+         "external_urls": {
+            "spotify": "https://open.spotify.com/track/2TpxZ7JUBn3uw46aR7qd6V"
+         },
+         "href": "https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V",
+         "id": "2TpxZ7JUBn3uw46aR7qd6V",
+         "is_local": false,
+         "is_playable": true,
+         "name": "All I Want",
+         "preview_url": "https://p.scdn.co/mp3-preview/12b8cee72118f995f5494e1b34251e4ac997445e?cid=774b29d4f13844c495f206cafdad9c86",
+         "track_number": 1,
+         "type": "track",
+         "uri": "spotify:track:2TpxZ7JUBn3uw46aR7qd6V"
+         }
+}
